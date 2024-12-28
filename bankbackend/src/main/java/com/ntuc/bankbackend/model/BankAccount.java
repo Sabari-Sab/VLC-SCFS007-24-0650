@@ -7,6 +7,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,6 +42,10 @@ public class BankAccount {
     
     @Column(nullable = false)
     private double deposit;
+
+    @ManyToOne
+    @JoinColumn(name = "cust_id", nullable = false)
+    private Customer customer;
 
     public void setBalance(double deposit){
            this.balance += deposit;
