@@ -37,7 +37,7 @@ public class BankAccount {
     private AccountType accountType;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="acc_status")
+    @Column(name="acc_status", nullable = false)
     private Status status;
     
     @Column(nullable = false)
