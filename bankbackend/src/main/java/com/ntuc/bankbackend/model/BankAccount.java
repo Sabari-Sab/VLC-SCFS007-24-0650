@@ -47,7 +47,7 @@ public class BankAccount {
     @JoinColumn(name = "cust_id", nullable = false)
     private Customer customer;
 
-    public void setBalance(double deposit){
+        public void setBalance(double deposit){
            this.balance += deposit;
     }
 
