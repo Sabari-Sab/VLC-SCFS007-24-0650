@@ -47,8 +47,8 @@ public class BankAccount {
     @Column(nullable = false)
     private double deposit;
 
-    @ManyToOne
-    @JoinColumn(name = "cust_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cust_id")
     private Customer customer;
 
     @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
