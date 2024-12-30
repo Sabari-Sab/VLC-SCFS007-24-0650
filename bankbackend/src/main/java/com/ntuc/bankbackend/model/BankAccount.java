@@ -58,4 +58,13 @@ public class BankAccount {
            this.balance += deposit;
     }
 
+    public BankAccount(String accHolderName, AccountType accountType, Status status, double deposit, Customer customer,
+            List<AccountTransaction> accountTransaction) {
+        this.accHolderName = accHolderName;
+        this.accountType = accountType;
+        this.status = status;
+        this.deposit = deposit;
+        this.customer = customer;
+        this.accountTransaction = accountTransaction;
+    }
 }
