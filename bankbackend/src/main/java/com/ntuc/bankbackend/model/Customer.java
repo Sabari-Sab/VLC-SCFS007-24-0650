@@ -29,7 +29,7 @@ public class Customer {
     private String name;
     private String email;
     private String phoneNumber;
-   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BankAccount> bankAccount;
     
 
