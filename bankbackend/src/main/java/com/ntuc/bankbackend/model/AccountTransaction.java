@@ -35,5 +35,9 @@ public class AccountTransaction {
     @ManyToOne
     @JoinColumn(name="acc_id", nullable = false)
     private BankAccount bankAccount;
-
+    
+    public AccountTransaction(Date transDate, TransactionType transactionType) {
+        this.transDate = transDate;
+        this.transactionType = transactionType;
+    }
 }

@@ -51,7 +51,7 @@ public class BankAccount {
     @JoinColumn(name = "cust_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<AccountTransaction> accountTransaction;
 
     public void setBalance(double deposit){
@@ -63,6 +63,7 @@ public class BankAccount {
         this.accHolderName = accHolderName;
         this.accountType = accountType;
         this.status = status;
+        this.setBalance(deposit);
         this.deposit = deposit;
         this.customer = customer;
         this.accountTransaction = accountTransaction;

@@ -1,5 +1,8 @@
 package com.ntuc.bankbackend.controllers;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,17 +13,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ntuc.bankbackend.model.AccountTransaction;
 import com.ntuc.bankbackend.model.AccountType;
 import com.ntuc.bankbackend.model.BankAccount;
 import com.ntuc.bankbackend.model.Customer;
 import com.ntuc.bankbackend.model.Status;
+import com.ntuc.bankbackend.model.TransactionType;
 // import com.ntuc.bankbackend.model.BankAccount;
 // import com.ntuc.bankbackend.model.Status;
 import com.ntuc.bankbackend.repo.AccountRepo;
 
 // @RestController
 @Controller
-public class MainController {
+public class AccountController {
 
     @Autowired
     AccountRepo accountRepo;
@@ -50,7 +55,21 @@ public class MainController {
 
     @PostMapping("/manageaccount/add")
     public String addAccount(@RequestParam("accholdername") String accholdername, @RequestParam("accholderemailadd") String accholderemailadd, @RequestParam("accholderphonenumber") String accholderphonenumber, @RequestParam("initialdepositamount") Double deposit, @RequestParam("bankaccounttype") String bankaccouunttype) {
-        // accountRepo.save(new BankAccount(accholdername, AccountType.valueOf(bankaccouunttype), Status.ACTIVE, deposit, new Customer, null);
+        
+        long millis = System.currentTimeMillis();
+        Date currentdate = new Date(millis);
+        
+        List<AccountTransaction> accountTransactionsList = new ArrayList<>();
+        AccountTransaction accountTransaction = new AccountTransaction();
+        accountTransaction.setTransDate(currentdate);
+        accountTransaction.setTransactionType(TransactionType.ADD_ACC);
+        accountTransactionsList.add(accountTransaction);
+
+        BankAccount bankAccount = new BankAccount(accholdername, AccountType.valueOf(bankaccouunttype), Status.ACTIVE, deposit, new Customer(accholdername, accholderemailadd, accholderphonenumber), accountTransactionsList);
+        accountTransaction.setBankAccount(bankAccount);
+
+        accountRepo.save(bankAccount);
+        
         return "redirect:/manageaccount/add";
     }
 
