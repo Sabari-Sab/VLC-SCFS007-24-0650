@@ -1,0 +1,11 @@
+.index-section-one, .index-section-two, .index-section-three {
+    width: 80%;
+    padding: 5px;
+    margin: auto;
+    display: flex;
+    
+}
+.index-section-one img, .index-section-two img, .index-section-three img {
+    max-width: 100%;
+    max-height: auto;
+}

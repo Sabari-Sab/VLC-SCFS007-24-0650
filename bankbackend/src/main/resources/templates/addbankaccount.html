@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{components :: head(title=${'NTUC LH Bank'})}">
+</th:block>
+
+<body>
+    <th:block th:replace="~{components :: nav}"></th:block>
+
+    <!-- form for creating new users/bank account -->
+    <form action="/manageaccount/add" method="post">
+        <table>
+            <tr>
+                <td><label for="accholdername">Account Holder Name</label></td>
+                <td><input type="text" id="accholdername" name="accholdername"></td>
+            </tr>
+            <tr>
+                <td><label for="accholderemailadd">Account Holder Email Address</label></td>
+                <td><input type="text" id="accholderemailadd" name="accholderemailadd"></td>
+            </tr>
+            <tr>
+                <td><label for="accholderphonenumber">Account Holder Phone Number</label></td>
+                <td><input type="text" id="accholderphonenumber" name="accholderphonenumber"></td>
+            </tr>
+            <tr>
+                <td><label for="initialdepositamount">Initial Deposit Amount</label></td>
+                <td><input type="text" id="initialdepositamount" name="initialdepositamount"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" id="current" name="bankaccounttype" value="CURRENT">
+                    <label for="current">CURRENT</label>
+                    <input type="radio" id="savings" name="bankaccounttype" value="SAVINGS">
+                    <label for="savings">SAVINGS</label>
+                    <input type="radio" id="nri" name="bankaccounttype" value="NRI">
+                    <label for="nri">NRI</label>
+                    <input type="radio" id="special" name="bankaccounttype" value="SPECIAL">
+                    <label for="special">SPECIAL</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Save">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <th:block th:replace="~{components :: footer}"></th:block>
+</body>
+
+</html>
