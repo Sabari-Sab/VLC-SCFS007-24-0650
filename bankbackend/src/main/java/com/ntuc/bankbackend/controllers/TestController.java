@@ -62,10 +62,26 @@ public class TestController {
         } else {
             return "Account does not exist";
         }
-        
+
         accountRepo.delete(bankAccount);
     
         return "Account removed";
+    }
+
+    @PostMapping("/viewacc")
+    public String viewAcc(@RequestParam String accHolderName){
+        List<BankAccount> accs = accountRepo.findByAccHolderName(accHolderName);
+        BankAccount bankAccount = new BankAccount();
+        Optional<BankAccount> optionalbankAccount = accs.stream().filter(acc -> acc.getAccHolderName().equals(accHolderName)).findFirst();
+        if(optionalbankAccount.isPresent()){
+          bankAccount = optionalbankAccount.get();
+          System.out.println(bankAccount.getCustomer().getName());
+        } else {
+            return "Account does not exist";
+        }
+        
+    
+        return bankAccount.toString();
     }
 
 }

@@ -68,4 +68,12 @@ public class BankAccount {
         this.customer = customer;
         this.accountTransaction = accountTransaction;
     }
+
+    @Override
+    public String toString() {
+        return "BankAccount [id=" + id + ", accHolderName=" + accHolderName + ", balance=" + balance + ", accountType="
+                + accountType + ", status=" + status + ", deposit=" + deposit + "]";
+    }
+
+    
 }
