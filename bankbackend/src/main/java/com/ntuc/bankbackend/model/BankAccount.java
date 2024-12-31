@@ -47,11 +47,11 @@ public class BankAccount {
     @Column(nullable = false)
     private double deposit;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cust_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AccountTransaction> accountTransaction;
 
     public void setBalance(double deposit){
