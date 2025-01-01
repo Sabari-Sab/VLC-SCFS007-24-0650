@@ -53,6 +53,11 @@ public class AccountController {
         return "index";
     }
 
+    @PostMapping("/home")
+    public String homePage0(){
+        return "index";
+    }
+
     @PostMapping("/manageaccount/add")
     public String addAccount(@RequestParam("accholdername") String accholdername, @RequestParam("accholderemailadd") String accholderemailadd, @RequestParam("accholderphonenumber") String accholderphonenumber, @RequestParam("initialdepositamount") Double deposit, @RequestParam("bankaccounttype") String bankaccouunttype) {
         
@@ -76,5 +81,10 @@ public class AccountController {
     @GetMapping("/manageaccount/add")
     public String addAccount0() {
         return "addbankaccount";
+    }
+
+    @GetMapping("/login")
+    public String showLogin() {
+        return "login";
     }
 }
