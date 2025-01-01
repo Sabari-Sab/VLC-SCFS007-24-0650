@@ -2,6 +2,8 @@ package com.ntuc.bankbackend.model;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -34,6 +36,7 @@ public class AccountTransaction {
     private TransactionType transactionType;
     @ManyToOne
     @JoinColumn(name="acc_id", nullable = false)
+    @JsonIgnore
     private BankAccount bankAccount;
     
     public AccountTransaction(Date transDate, TransactionType transactionType) {
