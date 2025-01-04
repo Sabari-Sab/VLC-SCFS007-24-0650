@@ -94,4 +94,16 @@ public class AccountController {
 
         return "viewaccount";
     }
+
+    @GetMapping("/withdraw")
+    public String withdraw(){
+
+        return "withdraw";
+    }
+
+    @GetMapping("/deposit")
+    public String deposit(){
+
+        return "deposit";
+    }
 }
