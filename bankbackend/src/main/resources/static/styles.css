@@ -9,3 +9,8 @@
     max-width: 100%;
     max-height: auto;
 }
+
+.container-footer {
+    position: relative;
+    bottom: 0;
+}
