@@ -26,6 +26,5 @@ public class Roles {
     private RoleType roleType;
     
 
-
-
 }
+

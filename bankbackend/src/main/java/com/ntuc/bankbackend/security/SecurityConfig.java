@@ -23,6 +23,11 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    /* @Bean
+    UserDetailsService userDetailsService() {
+        return new UserDetailsServiceImpl();
+    } */
+
     // Created one admin user in the meantime 
     @Bean
     UserDetailsService userDetailsService(PasswordEncoder encoder) {
