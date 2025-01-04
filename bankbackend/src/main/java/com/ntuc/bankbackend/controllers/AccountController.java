@@ -3,6 +3,7 @@ package com.ntuc.bankbackend.controllers;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -86,5 +87,11 @@ public class AccountController {
     @GetMapping("/login")
     public String showLogin() {
         return "login";
+    }
+
+    @GetMapping("/view-acc")
+    public String viewAcc(){
+
+        return "viewaccount";
     }
 }
