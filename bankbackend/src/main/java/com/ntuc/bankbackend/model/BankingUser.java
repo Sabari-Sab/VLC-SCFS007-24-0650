@@ -24,6 +24,9 @@ public class BankingUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private Long id;
+    @Column(name="user_name")
+    private String username;
+    private String password;
     private String name;
     private String email;
     @OneToMany(cascade= CascadeType.ALL)
