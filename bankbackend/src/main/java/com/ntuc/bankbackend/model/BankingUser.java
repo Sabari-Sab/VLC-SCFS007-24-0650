@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,9 +30,9 @@ public class BankingUser {
     private String password;
     private String name;
     private String email;
-    @OneToMany(cascade= CascadeType.ALL)
+    @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="role_id")
-    private List<Roles> roles;
+    private Roles role;
 
 
 }
