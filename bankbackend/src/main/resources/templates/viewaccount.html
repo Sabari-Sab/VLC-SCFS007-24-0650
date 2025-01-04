@@ -11,9 +11,9 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Account Type</th>
+                <th scope="col">Account Holder Name</th>
+                <th scope="col">Balance</th>
               </tr>
             </thead>
             <tbody>
@@ -23,21 +23,18 @@
                 <td>Otto</td>
                 <td>@mdo</td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
             </tbody>
           </table>
+
+          <div style="margin-top: 10px;">
+            <button style="border: none; background: none; cursor: pointer;">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
     </div>
     <th:block th:replace="~{components :: footer}"></th:block>
+
+    
 </body>
 
 </html>
