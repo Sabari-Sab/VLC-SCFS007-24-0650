@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:replace="~{components :: head(title=${'NTUC LH Bank'})}">
+</th:block>
+<body>
+    
+    <h3>Add new user</h3>
+
+    <div style="width: 100%; margin:auto; text-align: left; min-height: 100vh;">
+        <!-- form for creating new users -->
+        <form action="/save" method="post" style="padding-top: 20px; padding-left: 40px;">
+            <table>
+                <tr>
+                    <td><label for="username">Username</label></td>
+                    <td><input type="text" id="username" name="username"></td>
+                </tr>
+                <tr>
+                    <td><label for="fullname">Full Name</label></td>
+                    <td><input type="text" id="fullname" name="fullname"></td>
+                </tr>
+                <tr>
+                    <td><label for="emailaddress">Email Address</label></td>
+                    <td><input type="text" id="emailaddress" name="emailaddress"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="pass" id="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="customer" name="roletype" value="CUSTOMER">
+                        <label for="customer">CUSTOMER</label>
+                        <input type="radio" id="bankteller" name="roletype" value="BANK_TELLER">
+                        <label for="bankteller">BANK TELLER</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Save">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <th:block th:replace="~{components :: footer}"></th:block>
+</body>
+</html>

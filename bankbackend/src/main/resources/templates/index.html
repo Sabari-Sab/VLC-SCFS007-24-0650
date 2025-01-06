@@ -6,6 +6,9 @@
 
 <body>
     <th:block th:replace="~{components :: nav}"></th:block>
+
+    <h1>Welcome, <span sec:authentication="name"></span></h1>
+
     <div style="width: 80%; margin:auto; min-height: 100%; height: auto;">
         <div class="index-section-one">
             <img src="/landingpage1.png" alt="">

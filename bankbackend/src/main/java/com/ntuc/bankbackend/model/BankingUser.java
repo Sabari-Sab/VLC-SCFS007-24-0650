@@ -30,6 +30,13 @@ public class BankingUser {
     @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="role_id")
     private Roles role;
-
+    
+    public BankingUser(String userName, String password, String name, String email, Roles role) {
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.role = role;
+    }
 
 }
