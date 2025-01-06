@@ -29,7 +29,7 @@ public class Customer {
     private String email;
     private String phoneNumber;
     private String address;
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String NRIC;
     // @OneToOne
     // @JoinColumn(name="user_id")

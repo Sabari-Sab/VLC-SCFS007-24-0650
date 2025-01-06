@@ -83,9 +83,15 @@ public class AccountController {
         return "login";
     }
 
-    @GetMapping("/view-acc")
-    public String viewAcc(){
+    // @GetMapping("/view-acc")
+    // public String viewAcc(){
 
+    //     return "viewaccount";
+    // }
+
+    @GetMapping("/view-accts")
+    public String viewAccts(Model model){
+        model.addAttribute("acclist", accountRepo.findAll());
         return "viewaccount";
     }
 
