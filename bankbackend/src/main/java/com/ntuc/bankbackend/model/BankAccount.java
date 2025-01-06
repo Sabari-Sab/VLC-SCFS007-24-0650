@@ -43,6 +43,9 @@ public class BankAccount {
     @Enumerated(EnumType.STRING)
     @Column(name="acc_status", nullable = false)
     private Status status;
+
+    @Enumerated(EnumType.STRING)
+    private GenderType gender;
     
     @Column(nullable = false)
     private double deposit;

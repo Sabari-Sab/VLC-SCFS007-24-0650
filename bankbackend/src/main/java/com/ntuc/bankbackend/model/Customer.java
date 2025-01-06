@@ -28,6 +28,9 @@ public class Customer {
     private String name;
     private String email;
     private String phoneNumber;
+    private String address;
+    @Column(nullable = false)
+    private String NRIC;
     // @OneToOne
     // @JoinColumn(name="user_id")
     // private BankingUser user;
