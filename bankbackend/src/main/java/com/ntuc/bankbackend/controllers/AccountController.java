@@ -1,5 +1,6 @@
 package com.ntuc.bankbackend.controllers;
 
+import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.ntuc.bankbackend.model.Roles;
 import com.ntuc.bankbackend.model.Status;
 import com.ntuc.bankbackend.model.TransactionType;
 import com.ntuc.bankbackend.repo.AccountRepo;
+import com.ntuc.bankbackend.repo.CustomerRepo;
 import com.ntuc.bankbackend.repo.RoleRepo;
 import com.ntuc.bankbackend.repo.UserRepo;
 
@@ -37,6 +39,9 @@ public class AccountController {
 
     @Autowired
     RoleRepo roleRepo;
+
+    @Autowired
+    CustomerRepo customerRepo;
 
     // password encryption
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -123,5 +128,32 @@ public class AccountController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
         return "redirect:/newuser";
+    }
+
+    @PostMapping("/update")
+    public String updateCustomer(@RequestParam Long userid,@RequestParam("emailaddress") String emailAddress, @RequestParam("phonenumber") String phoneNumber, @RequestParam String nric, @RequestParam String address) {
+        
+        Customer customer = customerRepo.findById(userid).get();
+        customer.setEmail(emailAddress);
+        customer.setAddress(address);
+        customer.setNRIC(nric);
+        customer.setPhoneNumber(phoneNumber);
+
+        customerRepo.save(customer);
+
+        BankingUser bankingUser = userRepo.findByUserName(customer.getName());
+        bankingUser.setEmail(emailAddress);
+        userRepo.save(bankingUser);
+
+        return "redirect:/home";
+    }
+
+    @GetMapping("/updateView")
+    public String updateView(Model model, Principal principal) {
+       
+        Customer customer = customerRepo.findByName(principal.getName());
+        model.addAttribute("custDetl", customer);
+        
+        return "updateacc";
     }
 }
