@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<th:block th:replace="~{components :: head(title=${'NTUC LH Bank'})}">
+</th:block>
+
+<body>
+    <th:block th:replace="~{components :: nav}"></th:block>
+    <div style="width: 50%; margin:auto; text-align: center; min-height: 100vh;">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Account ID</th> 
+                <th scope="col">Account Holder Name</th>
+                <th scope="col">Transaction</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="bankaccount : ${acclist}">
+                <td th:text="${bankaccount.id}"></td>
+                  <td th:text="${bankaccount.accHolderName}"></td>
+                  <td th:text="${bankaccount.transaction}"></td>
+                  <td th:text="${bankaccount.#}"></td>
+                  <td><a th:href="@{/transact/{id} (id=${bankaccount.id})}"><i class="fa-solid fa-money-bill-transfer"></i></a></td>
+                  <td><a th:href="@{/#/{id} (id=${bankaccount.id})}"><i class="fa-solid fa-money-bill-transfer"></i></a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          
+          
+
+          
+    </div>
+    <th:block th:replace="~{components :: footer}"></th:block>
+
+    
+</body>
+
+</html>
