@@ -29,15 +29,16 @@ public class Customer {
     private String email;
     private String phoneNumber;
     private String address;
-    //@Column(nullable = false)
+    @Column(nullable = false)
     private String NRIC;
     // @OneToOne
     // @JoinColumn(name="user_id")
     // private BankingUser user;
     
-    public Customer(String name, String email, String phoneNumber) {
+    public Customer(String name, String email, String phoneNumber, String NRIC) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.NRIC = NRIC;
     }
 }

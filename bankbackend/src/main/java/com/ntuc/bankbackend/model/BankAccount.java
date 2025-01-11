@@ -61,9 +61,10 @@ public class BankAccount {
            this.balance += deposit;
     }
 
-    public BankAccount(String accHolderName, AccountType accountType, Status status, double deposit, Customer customer,
+    public BankAccount(String accHolderName, GenderType gender, AccountType accountType, Status status, double deposit, Customer customer,
             List<AccountTransaction> accountTransaction) {
         this.accHolderName = accHolderName;
+        this.gender = gender;
         this.accountType = accountType;
         this.status = status;
         this.setBalance(deposit);

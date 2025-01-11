@@ -13,7 +13,21 @@
             <table>
                 <tr>
                     <td><label for="accholdername">Account Holder Name</label></td>
-                    <td><input type="text" id="accholdername" name="accholdername"></td>
+                    <td><input type="text" id="accholdername" name="accholdername" required></td>
+                </tr>
+                <tr>
+                    <td><label for="accholdernric">Account Holder NRIC</label></td>
+                    <td><input type="text" id="accholdernric" name="accholdernric" required></td>
+                </tr>
+                <tr>
+                    <td><label for="accholdergender">Account Holder's Gender</label></td>
+                    <td>
+                        <select name="accholdergender" id="accholdergender">
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                        </select>
+                    </td>
+                    
                 </tr>
                 <tr>
                     <td><label for="accholderemailadd">Account Holder Email Address</label></td>
@@ -25,18 +39,17 @@
                 </tr>
                 <tr>
                     <td><label for="initialdepositamount">Initial Deposit Amount</label></td>
-                    <td><input type="text" id="initialdepositamount" name="initialdepositamount"></td>
+                    <td><input type="text" id="initialdepositamount" name="initialdepositamount" required></td>
                 </tr>
                 <tr>
+                    <td><label for="bankaccounttype">Bank Account Type</label></td>
                     <td>
-                        <input type="radio" id="current" name="bankaccounttype" value="CURRENT">
-                        <label for="current">CURRENT</label>
-                        <input type="radio" id="savings" name="bankaccounttype" value="SAVINGS">
-                        <label for="savings">SAVINGS</label>
-                        <input type="radio" id="nri" name="bankaccounttype" value="NRI">
-                        <label for="nri">NRI</label>
-                        <input type="radio" id="special" name="bankaccounttype" value="SPECIAL">
-                        <label for="special">SPECIAL</label>
+                        <select name="bankaccounttype" id="bankaccounttype">
+                            <option value="CURRENT">Current</option>
+                            <option value="SAVINGS">Savings</option>
+                            <option value="SPECIAL">Special</option>
+                            <option value="NRI">NRI</option>
+                        </select>
                     </td>
                 </tr>
                 <tr>

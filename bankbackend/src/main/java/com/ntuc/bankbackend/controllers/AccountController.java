@@ -19,6 +19,7 @@ import com.ntuc.bankbackend.model.AccountType;
 import com.ntuc.bankbackend.model.BankAccount;
 import com.ntuc.bankbackend.model.BankingUser;
 import com.ntuc.bankbackend.model.Customer;
+import com.ntuc.bankbackend.model.GenderType;
 import com.ntuc.bankbackend.model.RoleType;
 import com.ntuc.bankbackend.model.Roles;
 import com.ntuc.bankbackend.model.Status;
@@ -59,7 +60,7 @@ public class AccountController {
     }
 
     @PostMapping("/manageaccount/add")
-    public String addAccount(@RequestParam("accholdername") String accholdername, @RequestParam("accholderemailadd") String accholderemailadd, @RequestParam("accholderphonenumber") String accholderphonenumber, @RequestParam("initialdepositamount") Double deposit, @RequestParam("bankaccounttype") String bankaccouunttype) {
+    public String addAccount(@RequestParam("accholdername") String accholdername, @RequestParam("accholdernric") String accholdernric, @RequestParam("accholdergender") String accholdergender, @RequestParam("accholderemailadd") String accholderemailadd, @RequestParam("accholderphonenumber") String accholderphonenumber, @RequestParam("initialdepositamount") Double deposit, @RequestParam("bankaccounttype") String bankaccouunttype) {
         
         long millis = System.currentTimeMillis();
         Date currentdate = new Date(millis);
@@ -70,7 +71,7 @@ public class AccountController {
         accountTransaction.setTransactionType(TransactionType.ADD_ACC);
         accountTransactionsList.add(accountTransaction);
 
-        BankAccount bankAccount = new BankAccount(accholdername, AccountType.valueOf(bankaccouunttype), Status.ACTIVE, deposit, new Customer(accholdername, accholderemailadd, accholderphonenumber), accountTransactionsList);
+        BankAccount bankAccount = new BankAccount(accholdername, GenderType.valueOf(accholdergender), AccountType.valueOf(bankaccouunttype), Status.ACTIVE, deposit, new Customer(accholdername, accholderemailadd, accholderphonenumber, accholdernric), accountTransactionsList);
         accountTransaction.setBankAccount(bankAccount);
 
         accountRepo.save(bankAccount);
@@ -127,7 +128,7 @@ public class AccountController {
         BankingUser user = new BankingUser(username, password, fullname, emailaddress, role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
-        return "redirect:/newuser";
+        return "redirect:/login";
     }
 
     @PostMapping("/update")
