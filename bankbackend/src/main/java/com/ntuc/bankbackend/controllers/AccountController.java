@@ -230,4 +230,9 @@ public class AccountController {
         accountRepo.delete(bankAccount);
         return "redirect:/view-accts";
     }
+
+    @GetMapping("/transferfunds")
+    public String transferFunds(){
+        return "transferFunds";
+    }
 }
