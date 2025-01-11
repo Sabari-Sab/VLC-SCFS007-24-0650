@@ -4,14 +4,14 @@
 </th:block>
 <body>
     <th:block th:replace="~{components :: nav}"></th:block>
-    <form action="/" method="post">
+    <form th:action="@{/withdraw/{id}(id=${acct.id})}" method="post">
         <div class="card text-center" style="min-height: 100vh;">
             <div class="card-header">
-              Amount Withdrawal
+              Amount Withdrawal for Account holder <span th:text="${acct.accHolderName}"></span> 
             </div>
             <div class="card-body">
-              <h5 class="card-title">Enter the amount to withdraw</h5>
-              <input type="text" name="" value="">
+              <h5 class="card-title">Please enter the amount to withdraw</h5>
+              <input type="text" name="amount">
               <button class="btn btn-primary" type="submit">Withdraw</button>
             </div>
           </div>

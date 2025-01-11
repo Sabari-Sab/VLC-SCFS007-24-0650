@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -101,16 +102,70 @@ public class AccountController {
         return "viewaccount";
     }
 
-    @GetMapping("/withdraw")
-    public String withdraw(){
+    @GetMapping("/withdraw/{id}")
+    public String withdraw(@PathVariable Long id, Model model){
+
+        BankAccount bankAccount = accountRepo.findById(id).get();
+        model.addAttribute("acct", bankAccount);
 
         return "withdraw";
     }
 
-    @GetMapping("/deposit")
-    public String deposit(){
+    @GetMapping("/deposit/{id}")
+    public String deposit(@PathVariable Long id, Model model){
+
+        BankAccount bankAccount = accountRepo.findById(id).get();
+        model.addAttribute("acct", bankAccount);
 
         return "deposit";
+    }
+
+    @PostMapping("/withdraw/{id}")
+    public String processWithdraw(@PathVariable Long id, String amount){
+
+        long millis = System.currentTimeMillis();
+        Date currentdate = new Date(millis);
+
+        BankAccount bankAccount = accountRepo.findById(id).get();
+        double withdrawAmount = Double.parseDouble(amount);
+        if(bankAccount.getBalance() > 0 && withdrawAmount < bankAccount.getBalance()) { 
+        bankAccount.withdraw(withdrawAmount);
+        }
+        List<AccountTransaction> trans = bankAccount.getAccountTransaction();
+        AccountTransaction accountTransaction = new AccountTransaction();
+        accountTransaction.setBankAccount(bankAccount);
+        accountTransaction.setTransactionType(TransactionType.WITHDRAWAL);
+        accountTransaction.setTransDate(currentdate);
+        trans.add(accountTransaction);
+        bankAccount.setAccountTransaction(trans);
+
+        accountRepo.save(bankAccount);
+    
+        return "redirect:/view-accts";
+    }
+
+    @PostMapping("/deposit/{id}")
+    public String processDeposit(@PathVariable Long id, String amount){
+
+        long millis = System.currentTimeMillis();
+        Date currentdate = new Date(millis);
+
+        BankAccount bankAccount = accountRepo.findById(id).get();
+        double depositAmount = Double.parseDouble(amount);
+        if(depositAmount > 0) { 
+        bankAccount.setBalance(depositAmount);
+        }
+        List<AccountTransaction> trans = bankAccount.getAccountTransaction();
+        AccountTransaction accountTransaction = new AccountTransaction();
+        accountTransaction.setBankAccount(bankAccount);
+        accountTransaction.setTransactionType(TransactionType.DEPOSIT);
+        accountTransaction.setTransDate(currentdate);
+        trans.add(accountTransaction);
+        bankAccount.setAccountTransaction(trans);
+
+        accountRepo.save(bankAccount);
+    
+        return "redirect:/view-accts";
     }
 
     @GetMapping("/newuser")
