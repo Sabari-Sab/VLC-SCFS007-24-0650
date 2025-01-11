@@ -212,4 +212,14 @@ public class AccountController {
         
         return "updateacc";
     }
+
+    @GetMapping("/viewTransaction")
+    public String viewAccTrans(Principal principal, Model model){
+        List<BankAccount> bankAccounts = accountRepo.findByAccHolderName(principal.getName());
+        BankAccount bankAccount = bankAccounts.get(0);
+        List<AccountTransaction> accountTransactions = bankAccount.getAccountTransaction();
+        model.addAttribute("transactions", accountTransactions);
+        model.addAttribute("bankacct", bankAccount);
+        return "viewtransaction";
+    }
 }
