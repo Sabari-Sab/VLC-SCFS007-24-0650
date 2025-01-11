@@ -23,21 +23,30 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/home">Home</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Manage Accounts
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="/manageaccount/add">Add Account</a></li>
-                  <li><a class="dropdown-item" href="/manageaccount/remove">Remove Account</a></li>
-                </ul>
-              </li>
+              <div sec:authorize="hasAuthority('BANK_TELLER')">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Manage Accounts
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="/manageaccount/add">Add Account</a></li>
+                    <li><a class="dropdown-item" href="/manageaccount/remove">Remove Account</a></li>
+                  </ul>
+                </li>
+              </div>
               <li class="nav-item">
                 <a class="nav-link" href="/view-accts">View Accounts</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/viewTransaction">View Transactions</a>
-              </li>
+              <div sec:authorize="hasAuthority('CUSTOMER')">
+                <li class="nav-item">
+                  <a class="nav-link" href="/viewTransaction">View Transactions</a>
+                </li>
+              </div>
+              <div sec:authorize="hasAuthority('CUSTOMER')">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Transfer Funds</a>
+                </li>
+              </div>
               <li class="nav-item">
                 <a class="nav-link" href="/updateView">Update Customer details</a>
               </li>

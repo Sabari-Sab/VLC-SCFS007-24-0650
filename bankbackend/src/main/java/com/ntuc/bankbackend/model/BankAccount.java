@@ -66,7 +66,7 @@ public class BankAccount {
     }
 
     public BankAccount(String accHolderName, GenderType gender, AccountType accountType, Status status, double deposit, Customer customer,
-            List<AccountTransaction> accountTransaction) {
+            List<AccountTransaction> accountTransactionsList) {
         this.accHolderName = accHolderName;
         this.gender = gender;
         this.accountType = accountType;
@@ -74,7 +74,7 @@ public class BankAccount {
         this.setBalance(deposit);
         this.deposit = deposit;
         this.customer = customer;
-        this.accountTransaction = accountTransaction;
+        this.accountTransaction = accountTransactionsList;
     }
 
     @Override
