@@ -4,10 +4,26 @@
 <th:block th:replace="~{components :: head(title=${'NTUC LH Bank'})}">
 </th:block>
 
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .welcome-header {
+            font-family: 'Merriweather', sans-serif;
+            font-weight: 750;
+            font-size: 3rem;
+            margin: 30px 0;
+            text-align: center;
+            color: #0D47A1;
+        }
+    </style>
+</head>
+
 <body>
     <th:block th:replace="~{components :: nav}"></th:block>
 
-    <h1>Welcome, <span sec:authentication="name"></span></h1>
+    <h1 class="welcome-header">
+        Welcome, <span sec:authentication="name"></span>
+    </h1>
 
     <div style="width: 80%; margin:auto; min-height: 100%; height: auto;">
         <div class="index-section-one">
