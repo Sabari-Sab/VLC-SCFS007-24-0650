@@ -16,6 +16,7 @@
                 <th scope="col">Account Type</th>
                 <th scope="col">deposit</th>
                 <th scope="col">withdraw</th>
+                <th scope="col">Close account</th>
               </tr>
             </thead>
             <tbody>
@@ -26,6 +27,7 @@
                   <td th:text="${bankaccount.accountType}"></td>
                   <td><a th:href="@{/deposit/{id} (id=${bankaccount.id})}"><i class="fa-solid fa-circle-dollar-to-slot"></i></a></td>
                   <td><a th:href="@{/withdraw/{id} (id=${bankaccount.id})}"><i class="fa-solid fa-hand-holding-dollar"></i></a></td>
+                  <td><a th:href="@{/closeaccount/{id} (id=${bankaccount.id})}"><i class="fa-solid fa-user-xmark"></i></a></td>
               </tr>
             </tbody>
           </table>
