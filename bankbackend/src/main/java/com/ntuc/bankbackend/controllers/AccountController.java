@@ -223,4 +223,11 @@ public class AccountController {
         model.addAttribute("bankacct", bankAccount);
         return "viewtransaction";
     }
+
+    @GetMapping("/closeaccount/{id}")
+    public String closeacc(@PathVariable long id){
+        BankAccount bankAccount = accountRepo.findById(id).get();
+        accountRepo.delete(bankAccount);
+        return "redirect:/view-accts";
+    }
 }
