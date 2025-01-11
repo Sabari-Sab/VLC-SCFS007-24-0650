@@ -65,10 +65,6 @@ public class BankAccount {
         this.balance -=amount;
     }
 
-    public void withdraw(double amount){
-        this.balance -=amount;
-    }
-
     public BankAccount(String accHolderName, GenderType gender, AccountType accountType, Status status, double deposit, Customer customer,
             List<AccountTransaction> accountTransaction) {
         this.accHolderName = accHolderName;
