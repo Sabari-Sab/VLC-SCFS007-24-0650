@@ -215,7 +215,8 @@ public class AccountController {
 
     @GetMapping("/viewTransaction")
     public String viewAccTrans(Principal principal, Model model){
-        List<BankAccount> bankAccounts = accountRepo.findByAccHolderName(principal.getName());
+        BankingUser user = userRepo.findByUserName(principal.getName());
+        List<BankAccount> bankAccounts = accountRepo.findByAccHolderName(user.getName());
         BankAccount bankAccount = bankAccounts.get(0);
         List<AccountTransaction> accountTransactions = bankAccount.getAccountTransaction();
         model.addAttribute("transactions", accountTransactions);
