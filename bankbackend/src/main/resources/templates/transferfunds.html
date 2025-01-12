@@ -71,52 +71,48 @@
             margin: 20px 0;
         }
     </style>
+    <script>
+        function updateBalance() {
+            const accountDropdown = document.getElementById("from-account");
+            const balanceField = document.getElementById("balance");
+    
+            // Get the selected option
+            const selectedOption = accountDropdown.options[accountDropdown.selectedIndex];
+    
+            // Get the balance from the data attribute
+            const balance = selectedOption.getAttribute("data-balance");
+    
+            // Update the balance field
+            balanceField.value = balance ? `Available Balance: $${balance}` : "";
+        }
+    </script>
 <body>
     <h1>Transfer Funds to My Account</h1>
-    <form>
+    <form action="/" method="post">
         <!-- From Section -->
         <div class="section">
-            <h2>From</h2>
-            <label for="from-account">Account</label>
-            <select id="from-account">
+            <h2>From : <span th:text="${accHolderName}"></span></h2>
+            <label for="from-account">Account Type</label>
+            <select id="from-account" onchange="updateBalance()">
                 <option value="" selected disabled>Please select account...</option>
-                <option value="1">Account 1</option>
-                <option value="2">Account 2</option>
-                <option value="3">Account 3</option>
+                <option th:each="bankAccount : ${accts}" th:value="${bankAccount.accountType}" th:data-balance="${bankAccount.balance}" th:text="${bankAccount.accountType}"></option>
             </select>
-
-            <label for="from-currency">Currency</label>
-            <select id="from-currency">
-                <option value="" selected disabled>Please select currency...</option>
-                <option value="usd">USD</option>
-                <option value="eur">EUR</option>
-                <option value="sgd">SGD</option>
-            </select>
+            <label for="balance">Balance</label>
+            <input type="text" id="balance" name="balance" placeholder="Balance will be displayed here" readonly>
         </div>
 
         <hr>
 
         <!-- To Section -->
         <div class="section">
-            <h2>To</h2>
+            <h2>To : <span th:text="${accHolderName}"></span></h2>
             <label for="to-account">Account and Currency</label>
             <select id="to-account">
                 <option value="" selected disabled>Please select account...</option>
-                <option value="1">Account 1</option>
-                <option value="2">Account 2</option>
-                <option value="3">Account 3</option>
+                <option th:each="bankAccount : ${accts}" th:value="${bankAccount.accountType}" th:text="${bankAccount.accountType}"></option>
             </select>
-
-            <label for="transfer-currency">Transfer Currency</label>
-            <select id="transfer-currency">
-                <option value="" selected disabled>Please select currency...</option>
-                <option value="usd">USD</option>
-                <option value="eur">EUR</option>
-                <option value="sgd">SGD</option>
-            </select>
-
             <label for="amount">Amount</label>
-            <input type="text" id="amount" name="amount" placeholder="Enter amount">
+            <input type="text" id="amount" name="toamount" placeholder="Enter amount">
         </div>
 
         <button type="submit">Transfer</button>

@@ -232,7 +232,14 @@ public class AccountController {
     }
 
     @GetMapping("/transferfunds")
-    public String transferFunds(){
+    public String transferFunds(Principal principal, Model model){
+        BankingUser user = userRepo.findByUserName(principal.getName());
+        List<BankAccount> bankAccounts = accountRepo.findByAccHolderName(user.getName());
+        BankAccount bankAccount = bankAccounts.get(0);
+        String accHolderName = bankAccount.getAccHolderName();
+        model.addAttribute("accts", bankAccounts);
+        model.addAttribute("accHolderName", accHolderName);
+
         return "transferFunds";
     }
 }
