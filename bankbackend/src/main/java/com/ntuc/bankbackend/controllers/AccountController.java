@@ -242,4 +242,36 @@ public class AccountController {
 
         return "transferFunds";
     }
+
+    @PostMapping("/procTransferfunds")
+    public String processTransferFunds(@RequestParam Long fromAccountId, @RequestParam Long toAccountId, @RequestParam double toamount){
+        long millis = System.currentTimeMillis();
+        Date currentdate = new Date(millis);
+        BankAccount fromBankAccount = accountRepo.findById(fromAccountId).get();
+        BankAccount toBankAccount = accountRepo.findById(toAccountId).get();
+        double transferAmount = toamount;
+        fromBankAccount.withdraw(transferAmount);
+
+        List<AccountTransaction> fromAccAccountTransactions = fromBankAccount.getAccountTransaction();
+        List<AccountTransaction> toAccAccountTransactions = toBankAccount.getAccountTransaction();
+        AccountTransaction fromAccTransaction = new AccountTransaction();
+        fromAccTransaction.setTransactionType(TransactionType.REMIT);
+        fromAccTransaction.setTransDate(currentdate);
+        fromAccTransaction.setBankAccount(fromBankAccount);
+        fromAccAccountTransactions.add(fromAccTransaction);
+        fromBankAccount.setAccountTransaction(fromAccAccountTransactions);
+
+        AccountTransaction toAccountTransaction = new AccountTransaction();
+        toBankAccount.setBalance(transferAmount);
+        toAccountTransaction.setTransactionType(TransactionType.REMIT);
+        toAccountTransaction.setTransDate(currentdate);
+        toAccountTransaction.setBankAccount(toBankAccount);
+        toAccAccountTransactions.add(toAccountTransaction);
+        toBankAccount.setAccountTransaction(toAccAccountTransactions);
+
+        accountRepo.save(fromBankAccount);
+        accountRepo.save(toBankAccount);
+    
+        return "redirect:/view-accts";
+    }
 }

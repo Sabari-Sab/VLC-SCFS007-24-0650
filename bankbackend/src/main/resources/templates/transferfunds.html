@@ -2,103 +2,111 @@
 <html lang="en">
     <th:block th:replace="~{components :: head(title=${'NTUC LH Bank'})}">
     </th:block>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-
-        h1, h2 {
-            color: #333;
-            text-align: left;
-        }
-
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .section {
-            margin-bottom: 20px;
-        }
-
-        .section h2 {
-            margin-bottom: 10px;
-            border-bottom: 2px solid #ffcc00;
-            padding-bottom: 5px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        select, input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid #ddd;
-            margin: 20px 0;
-        }
-    </style>
-    <script>
-        function updateBalance() {
-            const accountDropdown = document.getElementById("from-account");
-            const balanceField = document.getElementById("balance");
-    
-            // Get the selected option
-            const selectedOption = accountDropdown.options[accountDropdown.selectedIndex];
-    
-            // Get the balance from the data attribute
-            const balance = selectedOption.getAttribute("data-balance");
-    
-            // Update the balance field
-            balanceField.value = balance ? `Available Balance: $${balance}` : "";
-        }
-    </script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                background-color: #f9f9f9;
+            }
+            h1, h2 {
+                color: #333;
+                text-align: left;
+            }
+            form {
+                max-width: 600px;
+                margin: 0 auto;
+                background: #fff;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .section {
+                margin-bottom: 20px;
+            }
+            .section h2 {
+                margin-bottom: 10px;
+                border-bottom: 2px solid #ffcc00;
+                padding-bottom: 5px;
+            }
+            label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: bold;
+            }
+            select, input[type="text"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 14px;
+            }
+            button {
+                background-color: #007bff;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 4px;
+                font-size: 16px;
+                cursor: pointer;
+                width: 100%;
+            }
+            button:hover {
+                background-color: #0056b3;
+            }
+            hr {
+                border: none;
+                border-top: 1px solid #ddd;
+                margin: 20px 0;
+            }
+        </style>
+        <script>
+            function updateBalanceAndId() {
+                const accountDropdown = document.getElementById("from-account");
+                const balanceField = document.getElementById("balance");
+                const hiddenAccountIdField = document.getElementById("fromaccount-id");
+        
+                // Get the selected option
+                const selectedOption = accountDropdown.options[accountDropdown.selectedIndex];
+        
+                // Get the balance from the data attribute
+                const balance = selectedOption.getAttribute("data-balance");
+                const fromaccountId = selectedOption.getAttribute("data-fromaccount-id");
+        
+                // Update the balance field
+                balanceField.value = balance ? `Available Balance: $${balance}` : "";
+                hiddenAccountIdField.value = fromaccountId || "";
+            }
+            function updateToAccId() {
+                const accountDropdown = document.getElementById("to-account");
+                const hiddenAccountIdField = document.getElementById("toaccount-id");
+        
+                // Get the selected option
+                const selectedOption = accountDropdown.options[accountDropdown.selectedIndex];
+        
+                // Get the balance from the data attribute
+                const toaccountId = selectedOption.getAttribute("data-toaccount-id");
+        
+                // Update the id in hidden input field
+                hiddenAccountIdField.value = toaccountId || "";
+            }
+        </script>
 <body>
+    <th:block th:replace="~{components :: nav}"></th:block>
     <h1>Transfer Funds to My Account</h1>
-    <form action="/" method="post">
+    <form action="/procTransferfunds" method="post">
         <!-- From Section -->
         <div class="section">
             <h2>From : <span th:text="${accHolderName}"></span></h2>
             <label for="from-account">Account Type</label>
-            <select id="from-account" onchange="updateBalance()">
+            <select name="fromAccountType" id="from-account" onchange="updateBalanceAndId()">
                 <option value="" selected disabled>Please select account...</option>
-                <option th:each="bankAccount : ${accts}" th:value="${bankAccount.accountType}" th:data-balance="${bankAccount.balance}" th:text="${bankAccount.accountType}"></option>
+                <option th:each="bankAccount : ${accts}" th:value="${bankAccount.accountType}" th:data-balance="${bankAccount.balance}" th:data-fromaccount-id="${bankAccount.id}" th:text="${bankAccount.accountType}"></option>
             </select>
             <label for="balance">Balance</label>
             <input type="text" id="balance" name="balance" placeholder="Balance will be displayed here" readonly>
+            <input type="hidden" id="fromaccount-id" name="fromAccountId" value="">
         </div>
 
         <hr>
@@ -107,12 +115,13 @@
         <div class="section">
             <h2>To : <span th:text="${accHolderName}"></span></h2>
             <label for="to-account">Account and Currency</label>
-            <select id="to-account">
+            <select name="toAccountType" id="to-account" onchange="updateToAccId()">
                 <option value="" selected disabled>Please select account...</option>
-                <option th:each="bankAccount : ${accts}" th:value="${bankAccount.accountType}" th:text="${bankAccount.accountType}"></option>
+                <option th:each="bankAccount : ${accts}" th:value="${bankAccount.accountType}" th:data-toaccount-id="${bankAccount.id}" th:text="${bankAccount.accountType}"></option>
             </select>
             <label for="amount">Amount</label>
             <input type="text" id="amount" name="toamount" placeholder="Enter amount">
+            <input type="hidden" id="toaccount-id" name="toAccountId" value="">
         </div>
 
         <button type="submit">Transfer</button>
