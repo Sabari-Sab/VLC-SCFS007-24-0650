@@ -27,7 +27,7 @@
                   <td th:text="${bankaccount.accountType}"></td>
                   <td><a th:href="@{/deposit/{id} (id=${bankaccount.id})}"><i class="fa-solid fa-circle-dollar-to-slot"></i></a></td>
                   <td><a th:href="@{/withdraw/{id} (id=${bankaccount.id})}"><i class="fa-solid fa-hand-holding-dollar"></i></a></td>
-                  <td><a th:href="@{/closeaccount/{id} (id=${bankaccount.id})}"><i class="fa-solid fa-user-xmark"></i></a></td>
+                  <td><a onclick="alert('Close this account? Please ensure that you have withdrawn all existing balances from the account.')" th:href="@{/closeaccount/{id} (id=${bankaccount.id})}"><i class="fa-solid fa-user-xmark"></i></a></td>
               </tr>
             </tbody>
           </table>
