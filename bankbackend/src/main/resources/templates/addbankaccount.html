@@ -4,12 +4,69 @@
 <th:block th:replace="~{components :: head(title=${'NTUC LH Bank'})}">
 </th:block>
 
+<head>
+    <th:block th:replace="~{components :: head(title=${'NTUC LH Bank'})}"></th:block>
+    <style>
+        /* Reset and basic styling */
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            /* min-height: 100vh; */
+        }
+
+        .whitespace {
+            min-height: 50vh;
+        }
+       /*  .container {
+            width:100%;
+            margin:auto;
+            text-align: left;
+            min-height: 100vh;
+        } */
+
+        h2 {
+            text-align: center;
+            color: #1a237e;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input:focus, select:focus {
+            border-color: #1a237e;
+            outline: none;
+        }
+
+    </style>
+</head>
+
+
+
 <body>
     <th:block th:replace="~{components :: nav}"></th:block>
 
-    <div style="width: 100%; margin:auto; text-align: left; min-height: 100vh;">
+    <div class="container">
         <!-- form for creating new users/bank account -->
-        <form action="/manageaccount/add" method="post" style="padding-top: 20px; padding-left: 40px;">
+        <form action="/manageaccount/add" method="post"> 
+            <!-- style="padding-top: 20px; padding-left: 40px;" -->
             <table>
                 <tr>
                     <td><label for="accholdername">Account Holder Name</label></td>
@@ -60,6 +117,8 @@
             </table>
         </form>
     </div>
+
+    <div class="whitespace"></div>
 
     <th:block th:replace="~{components :: footer}"></th:block>
 </body>
