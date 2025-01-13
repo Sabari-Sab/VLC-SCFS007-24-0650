@@ -85,6 +85,12 @@ public class AccountController {
         return "addbankaccount";
     }
 
+    @GetMapping("/manageaccount/remove")
+    public String removeAccount(Model model) {
+        model.addAttribute("acclist", accountRepo.findAll());
+        return "viewaccount";
+    }
+
     @GetMapping("/login")
     public String showLogin() {
         return "login";
@@ -149,7 +155,7 @@ public class AccountController {
 
         accountRepo.save(bankAccount);
     
-        return "redirect:/view-accts";
+        return "redirect:/view-acct";
     }
 
     @PostMapping("/deposit/{id}")
@@ -173,7 +179,7 @@ public class AccountController {
 
         accountRepo.save(bankAccount);
     
-        return "redirect:/view-accts";
+        return "redirect:/view-acct";
     }
 
     @GetMapping("/newuser")
@@ -236,7 +242,7 @@ public class AccountController {
     public String closeacc(@PathVariable long id){
         BankAccount bankAccount = accountRepo.findById(id).get();
         accountRepo.delete(bankAccount);
-        return "redirect:/view-accts";
+        return "redirect:/view-acct";
     }
 
     @GetMapping("/transferfunds")
@@ -280,6 +286,6 @@ public class AccountController {
         accountRepo.save(fromBankAccount);
         accountRepo.save(toBankAccount);
     
-        return "redirect:/view-accts";
+        return "redirect:/view-acct";
     }
 }
