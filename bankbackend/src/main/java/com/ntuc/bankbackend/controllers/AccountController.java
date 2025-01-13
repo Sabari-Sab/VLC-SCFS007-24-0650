@@ -102,6 +102,14 @@ public class AccountController {
         return "viewaccount";
     }
 
+    @GetMapping("/view-acct")
+    public String viewAcct(Model model, Principal principal){
+        BankingUser user = userRepo.findByUserName(principal.getName());
+        List<BankAccount> bankAccounts = accountRepo.findByAccHolderName(user.getName());
+        model.addAttribute("acclist", bankAccounts);
+        return "viewaccount";
+    }
+
     @GetMapping("/withdraw/{id}")
     public String withdraw(@PathVariable Long id, Model model){
 
