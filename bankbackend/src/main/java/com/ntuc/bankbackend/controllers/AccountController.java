@@ -221,7 +221,9 @@ public class AccountController {
     @GetMapping("/updateView")
     public String updateView(Model model, Principal principal) {
        
-        Customer customer = customerRepo.findByName(principal.getName());
+        BankingUser user = userRepo.findByUserName(principal.getName());
+        List<Customer> customerList = customerRepo.findByName(user.getName());
+        Customer customer = customerList.get(0);
         model.addAttribute("custDetl", customer);
         
         return "updateacc";
