@@ -64,7 +64,7 @@
 <body>
     <th:block th:replace="~{components :: nav}"></th:block>
     <h1>Transfer Funds to My Account</h1>
-    <form action="/procTransferfunds" method="post" onsubmit="validateForm(event)">
+    <form action="/procTransferfunds" method="post" th:if="${accts != null and !accts.isEmpty()}" onsubmit="validateForm(event)">
         <div class="section">
             <h2>From : <span th:text="${accHolderName}"></span></h2>
             <label for="from-account">Account Type</label>
@@ -92,6 +92,9 @@
 
         <button type="submit">Transfer</button>
     </form>
+    <div th:if="${accts == null or accts.isEmpty()}" style="text-align: center; color: red; min-height: 100vh;">
+        <p>No accounts available to display.</p>
+    </div>
     <th:block th:replace="~{components :: footer}"></th:block>
 </body>
 </html>

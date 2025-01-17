@@ -17,12 +17,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="accountTransaction : ${transactions}">
+              <tr th:if="${transactions != null and !transactions.isEmpty()}" th:each="accountTransaction : ${transactions}">
                 <td th:text="${accountTransaction.transId}"></td>
                   <td th:text="${bankacct.accHolderName}"></td>
                   <td th:text="${accountTransaction.transDate}"></td>
                   <td th:text="${accountTransaction.transactionType}"></td>
               </tr>
+              <tr th:if="${transactions == null or transactions.isEmpty()}">
+                <td colspan="4" style="text-align: center;">No transactions found.</td>
+            </tr>
             </tbody>
           </table>
 

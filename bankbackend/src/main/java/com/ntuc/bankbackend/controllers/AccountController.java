@@ -223,9 +223,10 @@ public class AccountController {
        
         BankingUser user = userRepo.findByUserName(principal.getName());
         List<Customer> customerList = customerRepo.findByName(user.getName());
+        if(customerList.size() > 0){
         Customer customer = customerList.get(0);
         model.addAttribute("custDetl", customer);
-        
+        }
         return "updateacc";
     }
 
@@ -233,10 +234,12 @@ public class AccountController {
     public String viewAccTrans(Principal principal, Model model){
         BankingUser user = userRepo.findByUserName(principal.getName());
         List<BankAccount> bankAccounts = accountRepo.findByAccHolderName(user.getName());
+        if(bankAccounts.size() > 0){
         BankAccount bankAccount = bankAccounts.get(0);
         List<AccountTransaction> accountTransactions = bankAccount.getAccountTransaction();
         model.addAttribute("transactions", accountTransactions);
         model.addAttribute("bankacct", bankAccount);
+        }
         return "viewtransaction";
     }
 
@@ -251,10 +254,12 @@ public class AccountController {
     public String transferFunds(Principal principal, Model model){
         BankingUser user = userRepo.findByUserName(principal.getName());
         List<BankAccount> bankAccounts = accountRepo.findByAccHolderName(user.getName());
+        if(bankAccounts.size()>0){
         BankAccount bankAccount = bankAccounts.get(0);
         String accHolderName = bankAccount.getAccHolderName();
         model.addAttribute("accts", bankAccounts);
         model.addAttribute("accHolderName", accHolderName);
+        }
 
         return "transferFunds";
     }
