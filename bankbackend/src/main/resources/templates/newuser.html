@@ -3,49 +3,59 @@
 <th:block th:replace="~{components :: head(title=${'NTUC LH Bank'})}">
 </th:block>
 <body>
+    <style>
+        .whitespace {
+            min-height: 50vh;
+        }
+    </style>
     
-    <h3>Add new user</h3>
-
-    <div style="width: 100%; margin:auto; text-align: left; min-height: 100vh;">
-        <!-- form for creating new users -->
-        <form action="/save" method="post" style="padding-top: 20px; padding-left: 40px;">
-            <table>
-                <tr>
-                    <td><label for="username">Username</label></td>
-                    <td><input type="text" id="username" name="username"></td>
-                </tr>
-                <tr>
-                    <td><label for="fullname">Full Name</label></td>
-                    <td><input type="text" id="fullname" name="fullname"></td>
-                </tr>
-                <tr>
-                    <td><label for="emailaddress">Email Address</label></td>
-                    <td><input type="email" id="emailaddress" name="emailaddress"></td>
-                </tr>
-                <tr>
-                    <td><label for="password">Password</label></td>
-                    <td><input type="password" id="password" name="password"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="radio" id="customer" name="roletype" value="CUSTOMER">
-                        <label for="customer">CUSTOMER</label>
-                        <input type="radio" id="bankteller" name="roletype" value="BANK_TELLER">
-                        <label for="bankteller">BANK TELLER</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" value="Save">
-                    </td>
-                    <td>
-                        <a href="/home">Back</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
+    <div class="bg-light py-3 py-md-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="bg-white p-4 p-md-5 rounded shadow-sm">
+                        <h3 class="text-center mb-4">Add New User</h3>
+                        <form action="/save" method="post" class="pt-3">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" id="username" name="username" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fullname" class="form-label">Full Name</label>
+                                <input type="text" id="fullname" name="fullname" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailaddress" class="form-label">Email Address</label>
+                                <input type="email" id="emailaddress" name="emailaddress" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Role</label>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="radio" id="customer" name="roletype"
+                                        value="CUSTOMER">
+                                    <label class="form-check-label" for="customer">Customer</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="bankteller" name="roletype"
+                                        value="BANK_TELLER">
+                                    <label class="form-check-label" for="bankteller">Bank Teller</label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a href="/home" class="btn btn-primary">Back</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="whitespace"></div>
+        <th:block th:replace="~{components :: footer}"></th:block>
     </div>
-
-    <th:block th:replace="~{components :: footer}"></th:block>
 </body>
 </html>
